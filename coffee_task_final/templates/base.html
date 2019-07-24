@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}CAFE COFFEE DAY{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- <style type="text/css">
+      .errorlist {
+        margin: 0;
+        padding: 0;
+      }
+      .errorlist li {
+        list-style: none;
+        font-size: 90%;
+        color: red;
+      }
+      .errorlist ~ input,
+      .errorlist ~ select {
+        border-color: red;
+      }
+    </style> -->
+  </head>
+  <body style="background: url('http://scottishbb.com/wp-content/uploads//2012/09/coffee-notebook-laptop.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: #464646;">
+    <div class="container">
+    <!-- <div class="jumbotron"> -->
+      <h1>CAFE COFFEE DAY</h1>
+      <hr>
+      {% block content %}
+      {% endblock %}
+    </div>
+    <!-- </div>   -->
+  </body>
+  <a href="json_File">json file</a>
+</html>

@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h2>ORDER FORM  {{ hi }}</h2>
+
+  <form method="post" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <label>Choice:</label>
+    <select id='id_option'>
+        <option value="">Select</option>
+        {% if options %}
+            There are {{ options|length }} records:
+            {% for o in options %}
+                <option value="{{ o.id }}">{{ o.option }}</option>
+            {% endfor %}
+        {% else %}
+           There are no records in the system
+        {% endif %}
+    </select>
+    <!-- <button type="submit"></button> -->
+    <!-- <a href="{% url 'category_changelist' %}"></a> -->
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  
+  <script>
+
+    // MACHINE
+    $("#id_machine").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      var machineId = $(this).val();
+      var packsizeId = $("#id_packsize").val();
+      var wlId = $("#id_wl").val();
+      var flavourId = $("#id_flavour").val();
+      var coffeeId = $("#id_coffeePod").val();
+      var TypeId = $("#id_Type").val();
+
+      $.ajax({
+        url: url,
+        dataType: 'text',
+        data: {
+          'machine': machineId,
+          'Type': TypeId,
+          'coffeePod' : coffeeId,
+          'flavour' : flavourId,
+          'wl' : wlId,
+          'packsize' : packsizeId,
+        },
+        success: function (data) {
+          $("#id_option").html(data);
+          console.log('success');
+        }
+      });
+
+    });
+
+    //TYPE
+    $("#id_Type").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      var TypeId = $(this).val();
+      var machineId = $("#id_machine").val();
+      var packsizeId = $("#id_packsize").val();
+      var wlId = $("#id_wl").val();
+      var flavourId = $("#id_flavour").val();
+      var coffeeId = $("#id_coffeePod").val();
+      console.log(url)
+      console.log(TypeId)
+      $.ajax({
+        url: url,
+        data: {
+          'Type': TypeId,
+          'machine': machineId,
+          'packsize' : packsizeId,
+          'wl' : wlId,
+          'flavour' : flavourId,
+          'coffeePod' : coffeeId
+        },
+        success: function (data) {
+          // console.log(data)
+          $("#id_option").html(data);
+          console.log('success')
+        }
+      });
+
+    });
+
+
+    // COFFEE_POD
+    $("#id_coffeePod").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      var coffeeId = $(this).val();
+      var machineId = $("#id_machine").val();
+      var TypeId = $("#id_Type").val();
+      var packsizeId = $("#id_packsize").val();
+      var wlId = $("#id_wl").val();
+      var flavourId = $("#id_flavour").val();
+      console.log(url)
+      console.log(coffeeId)
+      $.ajax({
+        url: url,
+        data: {
+          'coffeePod' : coffeeId,
+          'Type': TypeId,
+          'machine': machineId,
+          'packsize' : packsizeId,
+          'wl' : wlId,
+          'flavour' : flavourId
+        },
+        success: function (data) {
+          // console.log(data)
+          $("#id_option").html(data);
+          console.log('success')
+        }
+      });
+
+    });
+
+
+    // FLAVOUR            
+    $("#id_flavour").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      var flavourId = $(this).val();
+      var coffeeId = $("#id_coffeePod").val();
+      var machineId = $("#id_machine").val();
+      var TypeId = $("#id_Type").val();
+      var packsizeId = $("#id_packsize").val();
+      var wlId = $("#id_wl").val();
+      console.log(url)
+      console.log(flavourId)
+      $.ajax({
+        url: url,
+        data: {
+          'flavour' : flavourId,
+          'coffeePod' : coffeeId,
+          'Type': TypeId,
+          'machine': machineId,
+          'packsize' : packsizeId,
+          'wl' : wlId
+        },
+        success: function (data) {
+          // console.log(data)
+          $("#id_option").html(data);
+          console.log('success')
+        }
+      });
+
+    });
+
+    //WATERLINE
+    $("#id_wl").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      var wlId = $(this).val();
+      var flavourId = $("#id_flavour").val();
+      var coffeeId = $("#id_coffeePod").val();
+      var machineId = $("#id_machine").val();
+      var TypeId = $("#id_Type").val();
+      var packsizeId = $("#id_packsize").val();
+      console.log(url)
+      console.log(wlId)
+      $.ajax({
+        url: url,
+        data: {
+          'wl' : wlId,
+          'flavour' : flavourId,
+          'coffeePod' : coffeeId,
+          'Type': TypeId,
+          'machine': machineId,
+          'packsize' : packsizeId,
+        },
+        success: function (data) {
+          // console.log(data)
+          $("#id_option").html(data);
+          console.log('success')
+        }
+      });
+
+    });
+
+    //PACKSIZE
+    $("#id_packsize").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      var packsizeId = $(this).val();
+      var wlId = $("#id_wl").val();
+      var flavourId = $("#id_flavour").val();
+      var coffeeId = $("#id_coffeePod").val();
+      var machineId = $("#id_machine").val();
+      var TypeId = $("#id_Type").val();
+      console.log(url)
+      console.log(packsizeId)
+      $.ajax({
+        url: url,
+        data: {
+          'packsize' : packsizeId,
+          'wl' : wlId,
+          'flavour' : flavourId,
+          'coffeePod' : coffeeId,
+          'Type': TypeId,
+          'machine': machineId
+        },
+        success: function (data) {
+          // console.log(data)
+          $("#id_option").html(data);
+          console.log('success')
+        }
+      });
+
+    });
+                            
+       
+  </script>
+
+{% endblock %}
